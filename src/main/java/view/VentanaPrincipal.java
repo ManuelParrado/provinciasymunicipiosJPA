@@ -193,7 +193,9 @@ public class VentanaPrincipal extends JFrame {
 		
 	}
 
-	
+	/**
+	 * 
+	 */
 	private void filtraMunicipio() {
 		
 		this.jcbMunicipio.removeAllItems();
@@ -208,6 +210,9 @@ public class VentanaPrincipal extends JFrame {
 
 	}
 	
+	/**
+	 * 
+	 */
 	private void seleccionaMunicipio() {
 		
 		Municipio m = (Municipio) jcbMunicipio.getSelectedItem();
@@ -223,7 +228,10 @@ public class VentanaPrincipal extends JFrame {
 		}
 		
 	}
-
+	
+	/**
+	 * 
+	 */
 	private void guardar() {
 		
 		Provincia p = (Provincia) jcbProvincia.getSelectedItem();
