@@ -67,4 +67,10 @@ public class Provincia implements Serializable {
 		return municipio;
 	}
 
+	@Override
+	public String toString() {
+		return provincia;
+	}
+
+	
 }

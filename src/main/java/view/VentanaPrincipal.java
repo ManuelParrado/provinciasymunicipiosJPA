@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 
 
 import controller.ControladorMunicipio;
+import controller.ControladorProvincia;
 import model.Municipio;
 import model.Provincia;
 
@@ -101,6 +102,12 @@ public class VentanaPrincipal extends JFrame {
 		contentPane.add(jcbMunicipio, gbc_jcbMunicipio);
 		
 		JButton btnSelecionarMun = new JButton("Seleccionar");
+		btnSelecionarMun.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				seleccionaMunicipio();
+			}
+		});
 		GridBagConstraints gbc_btnSelecionarMun = new GridBagConstraints();
 		gbc_btnSelecionarMun.insets = new Insets(0, 0, 5, 0);
 		gbc_btnSelecionarMun.gridx = 1;
@@ -168,11 +175,22 @@ public class VentanaPrincipal extends JFrame {
 		panel.add(jcbProvincia, gbc_jcbProvincia);
 		
 		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				guardar();
+			}
+		});
 		GridBagConstraints gbc_btnGuardar = new GridBagConstraints();
 		gbc_btnGuardar.anchor = GridBagConstraints.EAST;
 		gbc_btnGuardar.gridx = 1;
 		gbc_btnGuardar.gridy = 2;
 		panel.add(btnGuardar, gbc_btnGuardar);
+		
+		jMunicipio.setEnabled(false);
+		
+		
+		
 	}
 
 	
@@ -189,5 +207,36 @@ public class VentanaPrincipal extends JFrame {
 		}
 
 	}
+	
+	private void seleccionaMunicipio() {
+		
+		Municipio m = (Municipio) jcbMunicipio.getSelectedItem();
+		
+		jMunicipio.setText(m.getNombre());
+		
+		List<Provincia> lista = ControladorProvincia.findAll();
+		
+		if (lista != null) {
+			for (Provincia p : lista) {
+				this.jcbProvincia.addItem(p);
+			}	
+		}
+		
+	}
+
+	private void guardar() {
+		
+		Provincia p = (Provincia) jcbProvincia.getSelectedItem();
+		Municipio m = (Municipio) jcbMunicipio.getSelectedItem();
+		
+		if (p != null && m != null) {
+			
+			m.setProvincia(p);
+			ControladorMunicipio.guardar(m);
+			
+		}
+		
+	}
+
 	
 }

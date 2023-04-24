@@ -62,4 +62,11 @@ public class Municipio implements Serializable {
 		this.provincia = provincia;
 	}
 
+	@Override
+	public String toString() {
+		return nombre;
+	}
+	
+	
+
 }

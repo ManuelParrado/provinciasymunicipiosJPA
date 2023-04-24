@@ -13,7 +13,7 @@ import model.Municipio;
 
 public class ControladorMunicipio {
 	
-	private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("provinciasyalquileres");
+	private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("provinciasymunicipios");
 
 	
 	public static List<Municipio> findByLikeNombre (String nombre) {
@@ -24,6 +24,32 @@ public class ControladorMunicipio {
 		
 		em.close();
 		return l;
+	}
+	
+	
+	public static void guardar (Municipio l) {
+		if (l.getId() == 0) {
+			insertar(l);
+		}
+		else {
+			modificar(l);
+		}
+	}
+	
+	public static void insertar (Municipio l) {
+		EntityManager em = entityManagerFactory.createEntityManager();
+		em.getTransaction().begin();
+		em.persist(l);
+		em.getTransaction().commit();
+		em.close();
+	}
+	
+	public static void modificar (Municipio l) {
+		EntityManager em = entityManagerFactory.createEntityManager();
+		em.getTransaction().begin();
+		em.merge(l);
+		em.getTransaction().commit();
+		em.close();
 	}
 	
 	
